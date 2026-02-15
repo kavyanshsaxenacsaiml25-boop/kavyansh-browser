@@ -13,7 +13,6 @@
       text-align: center;
     }
 
-    /* TITLE ANIMATION */
     .title {
       margin-top: 120px;
       font-size: 60px;
@@ -30,7 +29,6 @@
       to { transform: translateY(0); opacity: 1; }
     }
 
-    /* SEARCH */
     .search-box {
       margin-top: 30px;
       display: flex;
@@ -64,7 +62,6 @@
       box-shadow: 0 0 15px orange;
     }
 
-    /* AI PANEL */
     .ai-panel {
       position: fixed;
       right: -400px;
@@ -114,7 +111,6 @@
       opacity: 0.4;
       font-size: 13px;
     }
-
   </style>
 </head>
 
@@ -132,7 +128,6 @@
   OOPS Browser • Professional Web Experience 🚀
 </footer>
 
-<!-- AI Sidebar -->
 <div class="ai-panel" id="aiPanel">
   <h3>AI Assistant 🤖</h3>
 
@@ -191,8 +186,6 @@ async function sendMessage() {
   }
 }
 
-}
-
 function handleChat(event) {
   if(event.key === "Enter") {
     sendMessage();
@@ -202,4 +195,3 @@ function handleChat(event) {
 
 </body>
 </html>
-
