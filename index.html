@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Kavyansh Browser</title>
+  <title>EKMACHA Browser</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     :root {
       --bg: #0f0f0f;
-      --card: rgba(255,255,255,0.05);
+      --card: rgba(255,255,255,0.08);
       --text: white;
-      --accent: linear-gradient(90deg, orange, red);
+      --accent: linear-gradient(90deg, #ff7b00, #ff2d00);
     }
 
     body.light {
       --bg: #f4f4f4;
-      --card: rgba(0,0,0,0.05);
+      --card: rgba(0,0,0,0.08);
       --text: #111;
     }
 
@@ -23,48 +23,66 @@
       font-family: 'Segoe UI', sans-serif;
       background: var(--bg);
       color: var(--text);
+      overflow: hidden;
       transition: 0.3s ease;
     }
 
-    /* NAVBAR */
-    .navbar {
-      display: flex;
-      align-items: center;
-      padding: 10px;
+    /* TITLE ANIMATION */
+    .title {
+      text-align: center;
+      font-size: 55px;
+      margin-top: 40px;
+      background: var(--accent);
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: slideDown 1.2s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-80px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* IFRAME */
+    iframe {
+      width: 100%;
+      height: calc(100vh - 140px);
+      border: none;
+      margin-top: 20px;
+      animation: fadeIn 0.6s ease;
+    }
+
+    @keyframes fadeIn {
+      from {opacity:0;}
+      to {opacity:1;}
+    }
+
+    /* BOTTOM CONTROL BAR */
+    .control-bar {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
       background: var(--card);
       backdrop-filter: blur(10px);
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 100;
-      gap: 10px;
-    }
-
-    .tabs {
       display: flex;
-      gap: 5px;
-    }
-
-    .tab {
-      padding: 5px 10px;
-      background: var(--card);
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
+      padding: 12px;
+      gap: 10px;
+      align-items: center;
     }
 
     input {
       flex: 1;
-      padding: 10px;
-      border-radius: 20px;
+      padding: 12px;
+      border-radius: 25px;
       border: none;
       font-size: 15px;
       outline: none;
     }
 
     button {
-      padding: 8px 15px;
-      border-radius: 20px;
+      padding: 10px 18px;
+      border-radius: 25px;
       border: none;
       cursor: pointer;
       background: var(--accent);
@@ -73,20 +91,12 @@
     }
 
     button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 10px orange;
-    }
-
-    iframe {
-      width: 100%;
-      height: calc(100vh - 60px);
-      border: none;
-      margin-top: 60px;
-      animation: fadeIn 0.5s ease;
+      transform: scale(1.08);
+      box-shadow: 0 0 12px #ff7b00;
     }
 
     /* AI Sidebar */
-    .ai-sidebar {
+    .ai-panel {
       position: fixed;
       right: -350px;
       top: 0;
@@ -95,39 +105,36 @@
       background: var(--card);
       backdrop-filter: blur(10px);
       transition: 0.4s;
-      padding: 15px;
+      padding: 20px;
     }
 
-    .ai-sidebar.active {
+    .ai-panel.active {
       right: 0;
     }
 
-    @keyframes fadeIn {
-      from {opacity:0;}
-      to {opacity:1;}
+    .ai-panel h3 {
+      margin-top: 0;
     }
+
   </style>
 </head>
 
 <body>
 
-<div class="navbar">
-  <div class="tabs">
-    <div class="tab" onclick="newTab()">+ Tab</div>
-  </div>
+<h1 class="title">EKMACHA 🔥</h1>
 
+<iframe id="browserFrame"></iframe>
+
+<div class="control-bar">
   <input type="text" id="address" placeholder="Enter URL or search...">
-
   <button onclick="go()">Go</button>
   <button onclick="toggleAI()">AI</button>
   <button onclick="toggleTheme()">Theme</button>
 </div>
 
-<iframe id="browserFrame"></iframe>
-
-<div class="ai-sidebar" id="aiPanel">
+<div class="ai-panel" id="aiPanel">
   <h3>AI Assistant 🤖</h3>
-  <p>(AI chat integration coming next step)</p>
+  <p>AI chat integration coming soon...</p>
 </div>
 
 <script>
@@ -151,10 +158,6 @@ function toggleTheme() {
 
 function toggleAI() {
   document.getElementById("aiPanel").classList.toggle("active");
-}
-
-function newTab() {
-  document.getElementById("browserFrame").src = "about:blank";
 }
 </script>
 
