@@ -6,73 +6,65 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+      background: #111;
       color: white;
-      text-align: center;
     }
 
-    h1 {
-      font-size: 50px;
-      margin-top: 40px;
-      background: linear-gradient(90deg, orange, red);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .search-box {
-      margin: 20px;
+    .navbar {
+      display: flex;
+      padding: 10px;
+      background: #1c1c1c;
     }
 
     input {
-      width: 500px;
-      padding: 15px;
-      font-size: 18px;
-      border-radius: 30px;
+      flex: 1;
+      padding: 10px;
+      border-radius: 8px;
       border: none;
-      outline: none;
+      font-size: 16px;
     }
 
     button {
-      padding: 15px 25px;
-      font-size: 18px;
       margin-left: 10px;
-      border-radius: 30px;
+      padding: 10px 20px;
+      border-radius: 8px;
       border: none;
       cursor: pointer;
-      background: linear-gradient(90deg, orange, red);
+      background: orange;
       color: white;
     }
 
     iframe {
-      width: 95%;
-      height: 70vh;
-      border-radius: 15px;
+      width: 100%;
+      height: 90vh;
       border: none;
-      margin-top: 20px;
     }
   </style>
 </head>
 <body>
 
-<h1>Kavyansh Browser 🔥</h1>
-
-<div class="search-box">
-  <input type="text" id="search" placeholder="Search anything...">
-  <button onclick="search()">Search</button>
+<div class="navbar">
+  <input type="text" id="address" placeholder="Enter URL or search...">
+  <button onclick="go()">Go</button>
 </div>
 
-<iframe id="results"></iframe>
+<iframe id="browserFrame"></iframe>
 
 <script>
-function search() {
-  let query = document.getElementById("search").value;
-  if(query.trim() !== "") {
-    document.getElementById("results").src =
-      "https://www.bing.com/search?q=" + query;
+function go() {
+  let input = document.getElementById("address").value;
+
+  if(input.includes(".")) {
+    if(!input.startsWith("http")) {
+      input = "https://" + input;
+    }
+    document.getElementById("browserFrame").src = input;
+  } else {
+    document.getElementById("browserFrame").src =
+      "https://www.bing.com/search?q=" + input;
   }
 }
 </script>
 
 </body>
 </html>
-
