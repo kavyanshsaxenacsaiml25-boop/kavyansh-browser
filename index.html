@@ -2,7 +2,6 @@
 <html>
 <head>
   <title>Kavyansh Browser</title>
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4712/4712109.png">
   <style>
     body {
       margin: 0;
@@ -10,26 +9,18 @@
       background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
       color: white;
       text-align: center;
-      overflow: hidden;
-    }
-
-    .container {
-      margin-top: 150px;
-      animation: fadeIn 1.5s ease-in-out;
     }
 
     h1 {
-      font-size: 60px;
-      margin-bottom: 20px;
+      font-size: 50px;
+      margin-top: 40px;
       background: linear-gradient(90deg, orange, red);
       -webkit-background-clip: text;
       color: transparent;
     }
 
     .search-box {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      margin: 20px;
     }
 
     input {
@@ -39,7 +30,6 @@
       border-radius: 30px;
       border: none;
       outline: none;
-      padding-left: 20px;
     }
 
     button {
@@ -51,48 +41,34 @@
       cursor: pointer;
       background: linear-gradient(90deg, orange, red);
       color: white;
-      transition: 0.3s;
     }
 
-    button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 15px orange;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    footer {
-      position: absolute;
-      bottom: 20px;
-      width: 100%;
-      font-size: 14px;
-      opacity: 0.5;
+    iframe {
+      width: 95%;
+      height: 70vh;
+      border-radius: 15px;
+      border: none;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <h1>Kavyansh Browser 🔥</h1>
+<h1>Kavyansh Browser 🔥</h1>
 
-  <div class="search-box">
-    <input type="text" id="search" placeholder="Search anything...">
-    <button onclick="search()">Search</button>
-  </div>
+<div class="search-box">
+  <input type="text" id="search" placeholder="Search anything...">
+  <button onclick="search()">Search</button>
 </div>
 
-<footer>
-  Powered by Kavyansh • AI Ready Browser 🚀
-</footer>
+<iframe id="results"></iframe>
 
 <script>
 function search() {
   let query = document.getElementById("search").value;
   if(query.trim() !== "") {
-    window.location.href = "https://www.bing.com/search?q=" + query;
+    document.getElementById("results").src =
+      "https://www.bing.com/search?q=" + query;
   }
 }
 </script>
