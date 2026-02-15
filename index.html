@@ -2,9 +2,64 @@
 <html>
 <head>
   <title>Kavyansh Browser</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: #111;
+      color: white;
+      text-align: center;
+    }
+
+    .container {
+      margin-top: 150px;
+    }
+
+    h1 {
+      font-size: 50px;
+    }
+
+    input {
+      width: 500px;
+      padding: 15px;
+      font-size: 18px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+    }
+
+    button {
+      padding: 15px 25px;
+      font-size: 18px;
+      margin-left: 10px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      background: orange;
+    }
+
+    button:hover {
+      background: red;
+      color: white;
+    }
+  </style>
 </head>
-<body style="background:black;color:white;text-align:center;padding-top:100px;">
+<body>
+
+<div class="container">
   <h1>Kavyansh Browser 🔥</h1>
-  <p>Browser Live Successfully!</p>
+  <input type="text" id="search" placeholder="Search anything...">
+  <button onclick="search()">Search</button>
+</div>
+
+<script>
+function search() {
+  let query = document.getElementById("search").value;
+  if(query.trim() !== "") {
+    window.location.href = "https://www.bing.com/search?q=" + query;
+  }
+}
+</script>
+
 </body>
 </html>
