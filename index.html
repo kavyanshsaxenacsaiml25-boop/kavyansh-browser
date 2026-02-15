@@ -1,119 +1,93 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>EKMACHA Browser</title>
+  <title>OOPS Browser</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    :root {
-      --bg: #0f0f0f;
-      --card: rgba(255,255,255,0.08);
-      --text: white;
-      --accent: linear-gradient(90deg, #ff7b00, #ff2d00);
-    }
-
-    body.light {
-      --bg: #f4f4f4;
-      --card: rgba(0,0,0,0.08);
-      --text: #111;
-    }
-
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      overflow: hidden;
-      transition: 0.3s ease;
+      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+      color: white;
+      text-align: center;
     }
 
-    /* TITLE ANIMATION */
+    /* TITLE */
     .title {
-      text-align: center;
-      font-size: 55px;
-      margin-top: 40px;
-      background: var(--accent);
+      margin-top: 120px;
+      font-size: 60px;
+      font-weight: bold;
+      background: linear-gradient(90deg, orange, red);
       -webkit-background-clip: text;
       color: transparent;
-      animation: slideDown 1.2s ease forwards;
+      animation: drop 1s ease forwards;
       opacity: 0;
     }
 
-    @keyframes slideDown {
+    @keyframes drop {
       from { transform: translateY(-80px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
 
-    /* IFRAME */
-    iframe {
-      width: 100%;
-      height: calc(100vh - 140px);
-      border: none;
-      margin-top: 20px;
-      animation: fadeIn 0.6s ease;
-    }
-
-    @keyframes fadeIn {
-      from {opacity:0;}
-      to {opacity:1;}
-    }
-
-    /* BOTTOM CONTROL BAR */
-    .control-bar {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background: var(--card);
-      backdrop-filter: blur(10px);
+    /* SEARCH */
+    .search-box {
+      margin-top: 30px;
       display: flex;
-      padding: 12px;
-      gap: 10px;
+      justify-content: center;
       align-items: center;
+      gap: 15px;
     }
 
     input {
-      flex: 1;
-      padding: 12px;
-      border-radius: 25px;
+      width: 500px;
+      padding: 18px;
+      border-radius: 40px;
       border: none;
-      font-size: 15px;
+      font-size: 18px;
       outline: none;
     }
 
     button {
-      padding: 10px 18px;
-      border-radius: 25px;
+      padding: 15px 28px;
+      border-radius: 40px;
       border: none;
       cursor: pointer;
-      background: var(--accent);
+      background: linear-gradient(90deg, orange, red);
       color: white;
+      font-size: 16px;
       transition: 0.3s;
     }
 
     button:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 12px #ff7b00;
+      transform: scale(1.05);
+      box-shadow: 0 0 15px orange;
     }
 
-    /* AI Sidebar */
-    .ai-panel {
-      position: fixed;
-      right: -350px;
-      top: 0;
-      width: 300px;
-      height: 100%;
-      background: var(--card);
-      backdrop-filter: blur(10px);
-      transition: 0.4s;
-      padding: 20px;
+    /* OPTIONS BAR */
+    .options {
+      margin-top: 20px;
     }
 
-    .ai-panel.active {
-      right: 0;
+    .options button {
+      margin: 5px;
+      padding: 8px 15px;
+      font-size: 14px;
     }
 
-    .ai-panel h3 {
-      margin-top: 0;
+    /* IFRAME */
+    iframe {
+      width: 95%;
+      height: 70vh;
+      border: none;
+      border-radius: 15px;
+      margin-top: 30px;
+    }
+
+    footer {
+      margin-top: 20px;
+      opacity: 0.4;
+      font-size: 13px;
     }
 
   </style>
@@ -121,43 +95,51 @@
 
 <body>
 
-<h1 class="title">EKMACHA 🔥</h1>
+<h1 class="title">OOPS Browser 🔥</h1>
 
-<iframe id="browserFrame"></iframe>
-
-<div class="control-bar">
-  <input type="text" id="address" placeholder="Enter URL or search...">
-  <button onclick="go()">Go</button>
-  <button onclick="toggleAI()">AI</button>
-  <button onclick="toggleTheme()">Theme</button>
+<div class="search-box">
+  <input type="text" id="search" placeholder="Search anything...">
+  <button onclick="search()">Search</button>
 </div>
 
-<div class="ai-panel" id="aiPanel">
-  <h3>AI Assistant 🤖</h3>
-  <p>AI chat integration coming soon...</p>
+<div class="options">
+  <button onclick="openAI()">AI Bot</button>
+  <button onclick="toggleTheme()">Toggle Theme</button>
+  <button onclick="goHome()">Home</button>
 </div>
+
+<iframe id="results"></iframe>
+
+<footer>
+  OOPS Browser • Professional Web Experience 🚀
+</footer>
 
 <script>
-function go() {
-  let input = document.getElementById("address").value;
-  let frame = document.getElementById("browserFrame");
-
-  if(input.includes(".")) {
-    if(!input.startsWith("http")) {
-      input = "https://" + input;
-    }
-    frame.src = input;
-  } else {
-    frame.src = "https://www.bing.com/search?q=" + input;
+function search() {
+  let query = document.getElementById("search").value;
+  if(query.trim() !== "") {
+    document.getElementById("results").src =
+      "https://www.bing.com/search?q=" + query;
   }
 }
 
-function toggleTheme() {
-  document.body.classList.toggle("light");
+function openAI() {
+  document.getElementById("results").src =
+    "https://chat.openai.com";
 }
 
-function toggleAI() {
-  document.getElementById("aiPanel").classList.toggle("active");
+function goHome() {
+  document.getElementById("results").src = "about:blank";
+}
+
+function toggleTheme() {
+  if(document.body.style.background.includes("255")) {
+    document.body.style.background = "linear-gradient(135deg, #0f0f0f, #1a1a1a)";
+    document.body.style.color = "white";
+  } else {
+    document.body.style.background = "#ffffff";
+    document.body.style.color = "#111";
+  }
 }
 </script>
 
