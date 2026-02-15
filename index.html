@@ -2,45 +2,74 @@
 <html>
 <head>
   <title>Kavyansh Browser</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4712/4712109.png">
   <style>
     body {
       margin: 0;
-      font-family: Arial;
-      background: #111;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
       color: white;
       text-align: center;
+      overflow: hidden;
     }
 
     .container {
       margin-top: 150px;
+      animation: fadeIn 1.5s ease-in-out;
     }
 
     h1 {
-      font-size: 50px;
+      font-size: 60px;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, orange, red);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .search-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     input {
       width: 500px;
       padding: 15px;
       font-size: 18px;
-      border-radius: 8px;
+      border-radius: 30px;
       border: none;
       outline: none;
+      padding-left: 20px;
     }
 
     button {
       padding: 15px 25px;
       font-size: 18px;
       margin-left: 10px;
-      border-radius: 8px;
+      border-radius: 30px;
       border: none;
       cursor: pointer;
-      background: orange;
+      background: linear-gradient(90deg, orange, red);
+      color: white;
+      transition: 0.3s;
     }
 
     button:hover {
-      background: red;
-      color: white;
+      transform: scale(1.1);
+      box-shadow: 0 0 15px orange;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      font-size: 14px;
+      opacity: 0.5;
     }
   </style>
 </head>
@@ -48,9 +77,16 @@
 
 <div class="container">
   <h1>Kavyansh Browser 🔥</h1>
-  <input type="text" id="search" placeholder="Search anything...">
-  <button onclick="search()">Search</button>
+
+  <div class="search-box">
+    <input type="text" id="search" placeholder="Search anything...">
+    <button onclick="search()">Search</button>
+  </div>
 </div>
+
+<footer>
+  Powered by Kavyansh • AI Ready Browser 🚀
+</footer>
 
 <script>
 function search() {
@@ -63,3 +99,4 @@ function search() {
 
 </body>
 </html>
+
