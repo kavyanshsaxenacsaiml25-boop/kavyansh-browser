@@ -62,50 +62,6 @@
       box-shadow: 0 0 15px orange;
     }
 
-    .ai-panel {
-      position: fixed;
-      right: -400px;
-      top: 0;
-      width: 350px;
-      height: 100%;
-      background: #1c1c1c;
-      transition: 0.4s;
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .ai-panel.active {
-      right: 0;
-    }
-
-    .chat-box {
-      flex: 1;
-      overflow-y: auto;
-      margin-bottom: 10px;
-      text-align: left;
-    }
-
-    .message {
-      margin: 8px 0;
-    }
-
-    .user { color: orange; }
-    .bot { color: lightgreen; }
-
-    .chat-input {
-      display: flex;
-      gap: 5px;
-    }
-
-    .chat-input input {
-      flex: 1;
-      padding: 10px;
-      border-radius: 20px;
-      border: none;
-      font-size: 14px;
-    }
-
     footer {
       margin-top: 40px;
       opacity: 0.4;
@@ -121,23 +77,12 @@
 <div class="search-box">
   <input type="text" id="search" placeholder="Search anything..." onkeypress="handleSearch(event)">
   <button onclick="search()">Search</button>
-  <button onclick="toggleAI()">AI</button>
+  <button onclick="openAI()">AI 🤖</button>
 </div>
 
 <footer>
   OOPS Browser • Professional Web Experience 🚀
 </footer>
-
-<div class="ai-panel" id="aiPanel">
-  <h3>AI Assistant 🤖</h3>
-
-  <div class="chat-box" id="chatBox"></div>
-
-  <div class="chat-input">
-    <input type="text" id="chatInput" placeholder="Ask something..." onkeypress="handleChat(event)">
-    <button onclick="sendMessage()">Send</button>
-  </div>
-</div>
 
 <script>
 function search() {
@@ -153,43 +98,8 @@ function handleSearch(event) {
   }
 }
 
-function toggleAI() {
-  document.getElementById("aiPanel").classList.toggle("active");
-}
-
-async function sendMessage() {
-  let input = document.getElementById("chatInput");
-  let message = input.value;
-  if(message.trim() === "") return;
-
-  let chatBox = document.getElementById("chatBox");
-
-  chatBox.innerHTML += "<div class='message user'>You: " + message + "</div>";
-  input.value = "";
-
-  try {
-    const response = await fetch("http://localhost:5000/chat", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ message })
-    });
-
-    const data = await response.json();
-
-    chatBox.innerHTML += "<div class='message bot'>AI: " + data.reply + "</div>";
-    chatBox.scrollTop = chatBox.scrollHeight;
-
-  } catch (error) {
-    chatBox.innerHTML += "<div class='message bot'>AI: Server error ⚠️</div>";
-  }
-}
-
-function handleChat(event) {
-  if(event.key === "Enter") {
-    sendMessage();
-  }
+function openAI() {
+  window.open("https://chat.openai.com", "_blank");
 }
 </script>
 
